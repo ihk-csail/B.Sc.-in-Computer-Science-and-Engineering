@@ -1,0 +1,35 @@
+#include<iostream>
+using namespace std;
+
+struct Node
+{
+    int value;
+    Node *left;
+    Node *right;
+};
+
+struct Node* newnode (int data)
+{
+   struct Node* Node=new struct Node();
+    Node->value=data;
+    Node->left= NULL;
+    Node->right= NULL;
+    return Node;
+};
+void inorder(Node *root)
+{
+    Node* Null;
+	if (root == Null)
+	return;
+	inorder(root->left);
+	cout << root->value << " "<<endl;
+	inorder(root->right);
+}
+int main()
+{
+    Node *root= newnode(10);
+    root->left=newnode(20);
+    root->right=newnode(30);
+    cout<<"left="<<root->left->value<<endl;
+    cout<<"right="<<root->right->value;
+}

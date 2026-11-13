@@ -1,0 +1,182 @@
+QUESTION-1(OBE)
+
+#include <iostream>
+
+using namespace std;
+
+struct node
+{
+    int value;
+    node *left;
+    node *right;
+};
+class National_Id_Number
+{
+public:
+    node *create(int v)
+    {
+        node *temp=new node;
+        temp->value=v;
+        temp->left=temp->right=NULL;
+        return temp;
+    }
+    void Endorse(node *&root, int v)
+    {
+        if(root==NULL)
+        {
+            root=create(v);
+        }
+        else if(v<root->value)
+        {
+            Endorse(root->left,v);
+        }
+        else
+        {
+            Endorse(root->right,v);
+        }
+    }
+    void searchID(node *&root, int x)
+    {
+        if(root!=NULL)
+        {
+            if(root->value==x)
+            {
+                cout<<"Found!"<<endl;
+            }
+            else if (x<root->value)
+            {
+                searchID(root->left, x);
+            }
+            else if (x>root->value)
+            {
+                searchID(root->right,x);
+            }
+        }
+        else
+            cout<<"Not found"<<endl;
+    }
+};
+int main()
+{
+    node *root=NULL;
+    National_Id_Number *obj;
+    obj=new National_Id_Number;
+    int n,data,id,age;
+    cout<<"Enter number of people to endorse in your Database"<<endl;
+    cin>>n;
+    cout<<"Enter age of the citizen"<<endl;
+    cin>>age;
+    if(age>=18)
+    {
+    cout<<"Endorse persons in the database"<<endl;
+    for(int i=0; i<n; i++)
+    {
+        cin>>data;
+        obj->Endorse(root,data);
+    }
+    }
+     else
+        cout<<"You are not eligible to endorse into Database"<<endl;
+    int decision;
+    cout<<"Do you want to search ID then press 1"<<endl;
+    cin>>decision;
+    if(decision==1)
+    {
+    cout<<"Enter id to search"<<endl;
+    cin>>id;
+    obj->searchID(root,id);
+    }
+    else
+        cout<<"Thank you";
+
+    return 0;
+}
+
+
+
+
+
+QUESTION-2
+
+#include <iostream>
+
+using namespace std;
+
+struct node
+{
+    string feed;
+    node *next;
+};
+
+class linkedList
+{
+private:
+    node *start=NULL;
+public:
+    void insertNode(string f)
+    {
+        node *curr=start;
+        if(curr==NULL)
+        {
+            node *temp=new node;
+            temp->feed=f;
+            temp->next=NULL;
+            start=temp;
+            curr=temp;
+        }
+        else
+        {
+            while(curr->next!=NULL)
+            {
+                curr=curr->next;
+            }
+            node *temp=new node;
+            temp->feed=f;
+            temp->next=NULL;
+            curr->next=temp;
+            curr=temp;
+        }
+    }
+    void printFeed()
+    {
+        node *curr=start;
+        if(curr==NULL)
+        {
+            cout<<"Empty list."<<endl<<endl;
+        }
+        else
+        {
+            cout<<"Feed: "<<endl;
+            while(curr!=NULL)
+            {
+                cout<<curr->feed<<endl;
+                curr=curr->next;
+            }
+            cout<<endl;
+        }
+    }
+};
+
+int main()
+{
+    linkedList *obj=new linkedList;
+    int option;
+    string feed;
+
+    do
+    {
+        cout<<"Enter option:\n1.Insert Feed.\n2.Print.\n3.Exit."<<endl;
+        cin>>option;
+        if(option==1)
+        {
+            cout<<"Enter your feed."<<endl;
+            cin>>feed;
+            obj->insertNode(feed);
+        }
+        else if(option==2)
+        {
+            obj->printFeed();
+        }
+    }while(option!=3);
+    return 0;
+}

@@ -1,0 +1,76 @@
+#include<iostream>
+using namespace std;
+
+class MyStack
+{
+    int Stack[100], top, MaxSize;
+
+    public:
+        MyStack( int Size = 100 )
+        {
+             MaxSize = Size; top = 0;
+        }
+        bool IsEmpty();
+        bool IsFull();
+        bool Push( const int Element );
+        bool Pop( int Element );
+        bool TopElement( int Element );
+        void Show();
+        void Reset(){   top = 0; }
+};
+bool MyStack::Push( int Element )
+{
+    if(IsFull())
+    {
+        cout << "Stack Full" << endl;\
+        return false;
+    }
+    else
+    {
+        Stack[top]=Element;
+        top++;
+    }
+}
+bool MyStack::Pop(int Element)
+{
+    if(IsEmpty())
+    {
+        cout << "Stack Empty " << endl;
+        return false;
+    }
+    else
+    {
+        top--;
+        return true;
+    }
+}
+void MyStack::Show()
+{
+    for(int i=top-1; i>=0; i--)
+    {
+        cout << Stack[i] << " ";
+    }
+}
+bool MyStack::TopElement( int Element )
+    {
+    if(IsEmpty())
+    {
+        cout << "Stack Empty" << endl;
+        return false;
+    }
+    else
+    {
+        cout << "THe topmost value is:  " << Stack[top-1];
+    }
+}
+int main()
+{
+    MyStack s;
+    s.Push(10);
+    s.Push(20);
+    s.Push(30);
+    s.Pop(30)
+    s.Show();
+
+    return 0;
+}

@@ -1,0 +1,23 @@
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+    int num,i,A[100]={1,2,4,5,6,7};
+    cout<<"Enter the number you want to search"<<endl;
+    cin>>num;
+    int pos = -1;
+    for(i=0;i<100;i++)
+    {
+        if(num==A[i])
+        {
+            pos=i+1;
+        }
+    }
+    if(pos==-1)
+        cout<<"The number is not found in the array"<<endl;
+    else
+        cout<<"The number is found and the position is: "<<pos<<endl;
+
+}

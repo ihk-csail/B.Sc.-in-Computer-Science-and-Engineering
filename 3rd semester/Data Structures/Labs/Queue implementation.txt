@@ -1,0 +1,65 @@
+#include<iostream>
+using namespace std;
+    int i;
+    int AQueue[10], rear, Front, maxsize=10;
+    bool isEmty();
+    bool isFull();
+    bool enQueue(int item);
+    bool dequeue();
+    int FrontValue();
+    void showValue();
+
+int main()
+{
+    enQueue(3);
+    enQueue(6);
+    enQueue(4);
+    showValue();
+    dequeue();
+    dequeue();
+    showValue();
+    return 0;
+}
+
+    bool isEmty()
+    {
+        return (rear==Front);
+    }
+    bool isFull()
+    {
+        return (rear==maxsize);
+    }
+    bool enQueue(int item)
+    {
+        if(isFull())
+        {
+            return false;
+        }
+        AQueue[rear+1]=i;
+        return true;
+    }
+    bool dequeue()
+    {
+        if(isEmty())
+        {
+            return false;
+        }
+        rear--;
+        return true;
+    }
+    void showValue()
+    {
+    for( int i=0; i<=rear; i++)
+    {
+        cout<<AQueue[i]<<" "<<endl;
+    }
+    }
+    int FrontValue()
+    {
+        if(isEmty())
+       {
+          cout<<"The queue is empty"<<endl;
+       }
+        else
+        cout<<"The front value is: "<<AQueue[Front]<<endl;
+    }
