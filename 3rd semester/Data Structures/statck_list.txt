@@ -1,0 +1,104 @@
+#include <iostream>
+using namespace std;
+
+struct Node {
+	int data;
+	struct Node* link;
+};
+
+class Queue
+{
+    node *front_node;
+    node *rear_node;
+
+    void Enqueue()
+    {
+        
+    }
+};
+
+struct Node* top;
+
+void push(int data)
+{
+	struct Node* temp;
+	temp = new Node();
+	if (!temp) {
+		cout << "Stack Overflow";
+		return;
+	}
+	temp->data = data;
+	temp->link = top;
+	top = temp;
+	//cout << "  Now top: " <<top->data << endl;
+}
+
+int isEmpty()
+{
+	return top == NULL;
+}
+
+void peek()
+{
+	// check for empty stack
+	if (!isEmpty())
+		cout << "Top of stack: " << top->data << endl;
+    else
+        cout << "Stack is empty " << endl;
+
+}
+void pop()
+{
+	struct Node* temp;
+
+	// check for stack underflow
+	if (top == NULL) {
+		cout << "\nStack Underflow" << endl;
+	}
+	else {
+		temp = top;
+		top= top->link;
+        temp->link = NULL;
+	}
+}
+void display()
+{
+	struct Node* temp;
+    if (top == NULL) {
+		cout << "\nStack Underflow";
+	}
+	else {
+		temp = top;
+		while (temp != NULL) {
+            cout << temp->data << " ";
+            temp = temp->link;
+		}
+	}
+	cout << endl;
+}
+
+// Driver Code
+int main()
+{
+	push(7);
+	push(2);
+	push(3);
+	push(4);
+
+    display();
+
+	// print top elementof stack
+	//cout << "Top element is:  " << peek() << endl;
+
+	// delete top elements of stack
+	pop();
+	//pop();
+
+	// display stack elements
+    display();
+
+	// print top elementof stack
+	peek();
+	return 0;
+
+}

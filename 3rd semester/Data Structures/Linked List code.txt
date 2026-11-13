@@ -1,0 +1,84 @@
+#include <iostream>
+using namespace std;
+
+struct node
+{
+    int value;
+    node *next;
+};
+
+class Linkedlist
+{
+    struct node *head;
+    struct node *curr;
+public:
+    Linkedlist(int value)
+    {
+        head = new node;
+        curr = new node;
+        head->value = value;
+        head->next = NULL;
+        curr=head;
+    }
+    void insert_node(int v)
+    {
+        struct node *temp;
+        temp = new node;
+        temp->value = v;
+        temp->next = NULL;
+        curr->next = temp;
+        curr=temp;
+    }
+    void print_list()
+    {
+        node *n;
+        n = head;
+        while(n != NULL)
+        {
+            cout << n->value << "  ";
+            n = n->next;
+        }
+    }
+    void delete_node(int v)
+    {
+        struct node *temp, *prev;
+        temp = new node;
+        prev = new node;
+        temp = head;
+        if(temp != NULL && temp->value==v)
+        {
+            head = temp->next;
+        }
+        while(temp != NULL && temp->value != v)
+        {
+            prev = temp;
+            temp = temp->next;
+        }
+        prev->next = temp->next;
+    }
+    void search_key(int v)
+    {
+        struct node *temp, *prev;
+        temp = new node;
+        temp = head;
+        while(temp != NULL && temp->value != v)
+        {
+            temp = temp->next;
+        }
+        if(temp == NULL)
+            cout << v <<" not present" << endl;
+        else
+            cout << "Present" << endl;
+    }
+};
+
+int main()
+{
+    Linkedlist L(7);
+    L.insert_node(4);
+    L.insert_node(5);
+    L.delete_node(5);
+    L.search_key(9);
+    L.print_list();
+    return 0;
+}
