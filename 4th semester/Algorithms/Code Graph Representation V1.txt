@@ -1,0 +1,126 @@
+#include <iostream>
+
+using namespace std;
+
+class Edge       //declaring a class called 'Edge'
+{
+    public :
+        char startnode; 
+        char endnode; 
+        int weight; 
+
+
+};
+
+void searchVertex(Edge *ar,char *arr)
+{
+    int i,j;
+    cout<<"The adjacent vertices are :"<<endl;
+    for(i=0;i<8;i++)          //search the adjacency list to find the adjacent node
+     {
+        cout<<arr[i]<<" -> ";
+        for(j=0;j<10;j++)            // searching the adjacency list
+        {
+            if(ar[j].startnode==arr[i])           //print the endnode under given condition
+            {
+                cout<<ar[j].endnode<<" ";
+            }
+            if(ar[j].endnode==arr[i])              //print the startnode under given condition
+            {
+                cout<<ar[j].startnode<<" ";
+            }
+
+        }
+        cout<<endl;
+    }
+}
+
+void searchAdVertex(Edge *ar,char c)
+{
+    int i=0;
+
+    cout<<"The adjacent vertices of "<<c<<" are :"<<endl;
+    for(i=0;i<10;i++)       //search and print adjacency for a certain node
+    {
+        if(ar[i].startnode==c)       //print the endnode under given condition
+        {
+            cout<<ar[i].endnode<<endl;
+        }
+        else if(ar[i].endnode==c)         //print the startnode under given condition
+        {
+            cout<<ar[i].startnode<<endl;
+        }
+
+
+}
+}
+
+int main()
+{
+    Edge ar[10];      //declaring an array of the objects
+    char arr[8]={'A','B','C','D','E','F','G','H'};
+    int n;
+    char c;
+    char cho;
+
+        ar[0].startnode='A'; 
+        ar[0].endnode='B';
+        ar[0].weight=2 ;
+
+        ar[1].startnode='A';
+        ar[1].endnode='C';
+        ar[1].weight= 5;
+
+        ar[2].startnode='A';
+        ar[2].endnode='D';
+        ar[2].weight=3 ;
+
+        ar[3].startnode='B';
+        ar[3].endnode='E';
+        ar[3].weight=7 ;
+
+        ar[4].startnode='C';
+        ar[4].endnode='F';
+        ar[4].weight= 11;
+
+        ar[5].startnode='C';
+        ar[5].endnode='G';
+        ar[5].weight=5 ;
+
+        ar[6].startnode='D';
+        ar[6].endnode='H';
+        ar[6].weight= 9;
+
+        ar[7].startnode='E';
+        ar[7].endnode='F';
+        ar[7].weight=4 ;
+
+        ar[8].startnode='F';
+        ar[8].endnode='H';
+        ar[8].weight=1 ;
+
+        ar[9].startnode='G';
+        ar[9].endnode='H';
+        ar[9].weight=2 ;
+
+        cout<<"What do you want to see ?"<<endl<<"1 = Print all adjacent nodes "<<endl<<"2 = print adjacent nodes of a specific node "<<endl;
+
+        cin>>n;
+
+        if(n==1)
+        {
+            searchVertex(ar,arr);
+        }
+
+        else if(n==2)
+        {
+            cout<<"Enter the node "<<endl;
+            cin>>c;
+
+            searchAdVertex(ar,c);
+        }
+
+
+
+
+}

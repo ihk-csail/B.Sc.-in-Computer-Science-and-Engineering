@@ -1,0 +1,115 @@
+#include <iostream>
+#include <vector>
+#include <list>
+
+#define SIZE 8
+
+using namespace std;
+
+vector<int> arr;
+class Node;
+enum Color {White =1 ,Gray,Black};
+vector<Node> NQ;//creating vector of node type
+static int time = 0;//FOr a static value of 0, declaring variable named time
+
+struct Node//creating a structure
+{
+    int vertex;
+    Color curr_color;
+    int discovery_time;
+    int finish_time;
+};
+
+class Graph//creating a class named 'Graph'
+{
+public:
+    Graph();//constructor of the class
+    list<int> *adj;//list type pointer data
+    void addEdge(int x, int y);//function
+    void printAjacentList();//function
+};
+
+Graph::Graph()//constructor
+{
+    adj = new list<int> [SIZE];//dynamically allocation for a specific vertex
+}
+
+void Graph::printAjacentList()
+{
+    cout<< "Adjacent Node : "<< endl;
+    for(int i=0;i<SIZE; i++)
+    {
+        cout<< i << "\t[";//print the adjacent nodes
+        for(list<int>::iterator it=adj[i].begin(); it != adj[i].end(); it++)
+        {
+            cout<< *it << ",";//print the adjacency list
+        }
+        cout<< "]"<<endl;
+    }
+    cout<< "========================="<< endl;
+}
+
+void Graph::addEdge(int x, int y)//function of the class
+{
+    adj[x].push_back(y);//to allocate all the adjacency dynamically to a certain vertex
+}
+
+void DFSVisit(Graph G, Node u)
+{
+    u.curr_color = Gray;//set temporarily visited nodes to Gray
+    u.discovery_time = ++time;//discovery time of that node from the starting node
+    for(list<int>::iterator it=(G.adj[u.vertex]).begin(); it != (G.adj[u.vertex]).end(); it++ )//running the loop according to the number of adjacencies of a particular node
+    {
+        if(NQ[*it].curr_color == White)
+        {
+            DFSVisit(G, NQ[*it]);//Running the function recursively until it finds a node without adjacency
+        }
+    }
+    arr.push_back(u.vertex);
+    u.curr_color = Black;//turn all the explored nodes into black
+    u.finish_time = ++time;//stop exploring at this time
+}
+
+void DFS(Graph G, int startNode)
+{
+    if(NQ[startNode].curr_color == White)//When the node is not visited
+    {
+        DFSVisit(G, NQ[startNode]);//running DFSVisit function as starting node
+        cout<<endl;
+    }
+}
+
+int main()
+{
+    for(int i=0;i<SIZE; i++)//updating the data of a Node type object and pushing it in the vector 'NQ'
+    {
+        int v = i;
+        Node tmp;
+        tmp.vertex = v;
+        tmp.curr_color = White;
+        tmp.discovery_time = 0;
+        tmp.finish_time = 0;
+
+        NQ.push_back(tmp);
+    }
+
+    Graph g;
+    g.addEdge(0,1);//adding adjacency
+    g.addEdge(0,2);
+    g.addEdge(0,3);
+    g.addEdge(1,7);
+    g.addEdge(1,5);
+    g.addEdge(3,6);
+    g.addEdge(3,5);
+
+
+
+    DFS(g, 0);
+    cout<<"The Topological Sort is :"<<endl;
+    vector<int>::iterator ptr;
+    for(ptr=arr.end()-1; ptr>=arr.begin(); ptr--)
+    {
+        cout<<*ptr<<" ";
+    }
+    return 0;
+}

@@ -1,0 +1,129 @@
+#include <iostream>
+
+using namespace std;
+
+void ShowAdNode(char *arr,int A[][8])         //creating a function with arguements
+{
+    int i,j;
+    char n;
+    cout<<"Enter the node : "<<endl;
+    cin>>n;
+    for(i=0;i<8;i++)        //a loop to find the index of the desired vertex
+    {
+        if(arr[i]==n)          //run if the values are checked
+        {
+            break;
+        }
+    }
+
+    cout<<"The adjacent nodes of "<<arr[i]<<" are :"<<endl;
+    for(j=0;j<8;j++)         //to search row that belongs to the index of the vertex
+    {
+        if(A[i][j]!=0)
+         {
+            cout<<arr[j]<<" ";
+         }
+    }
+     cout<<endl;
+}
+
+void  ShowAllnodes(char arr[],int A[][8])
+{
+    cout<<"The adjacent nodes are :"<<endl;
+    for(int i=0;i<8;i++)        //run the loop once for each vertex
+    {
+        cout<<arr[i]<<" ->> ";
+        for(int j=0;j<8;j++)        //searching the adjacency of a certain vertex
+        {
+            if(A[i][j]==1)          //when the vertices are adjacent
+            {
+                cout<<arr[j]<<" ";
+            }
+        }
+        cout<<endl;
+    }
+}
+
+void CheckAd(char arr[],int A[][8])
+{
+    int i,j,k,l;
+    char m,n;
+    cout<<"Enter the 2 nodes that you want "<<endl;
+    cin>>m>>n;
+    for(i=0;i<8;i++)     //finding out the index of the first vertex
+    {
+        if(arr[i]==m)
+        {
+           k=i;        //put index of the first vertex into k
+        }
+    }
+
+    for(i=0;i<8;i++)       //running the loop for the second vertex
+    {
+        if(arr[i]==n)
+        {
+           l=i;       //put the index of the second vertex into l
+        }
+    }
+
+        if(A[k][l]!=0)        //checking whether the vertices are connected or not
+        {
+            cout<<"Connected"<<endl;
+        }
+        if(A[k][l]==0)        //checking whether the vertices are connected or not
+        {
+            cout<<"Not connected"<<endl;
+        }
+
+
+
+
+}
+int main()
+{
+    char cho;
+    int c;
+
+    int A[8][8]={{0,1,1,1,0,0,0,0},
+                          {1,0,0,0,1,1,0,0},
+                          {1,0,0,0,0,0,1,0},
+                          {1,0,0,0,0,0,0,1},
+                          {0,1,0,0,0,0,0,1},
+                          {0,1,0,0,0,0,0,1},
+                          {0,0,1,0,0,0,0,1},
+                          {0,0,0,1,1,1,1,0}};
+    char arr[8]={'A','B','C','D','E','F','G','H'};
+
+    do{
+
+            cout<<"What do you want to do ?"<<endl<<"1 = show adjacent nodes of a specific node "<<endl<<"2 = show all adjacent nodes "<<endl<<"3 = check adjacency"<<endl;
+
+            cin>>c;
+
+            if(c==1)
+            {
+                ShowAdNode(arr,A);
+            }
+            else if(c==2)
+            {
+                ShowAllnodes(arr,A);
+            }
+
+            else if(c==3)
+            {
+                CheckAd(arr,A);
+            }
+
+
+            else
+            {
+                cout<<"invalid option"<<endl;
+            }
+
+            cout<<"Do you want to run again ?(y/n)"<<endl;
+            cin>>cho;
+      }while(cho!='n');      //keep running the program until the user finishes
+
+
+
+}

@@ -1,0 +1,43 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int arr[10], i, j, temp,number;
+    cout<<"Enter how many number will be there"<<endl;
+    cin>>number;
+    cout<<"Input numbers to an Array: ";
+    for(i=0; i<number; i++)
+    {
+        cin>>arr[i];
+    }
+    cout<<"Before sorting"<<endl;
+    cout<<"Enter Inputs to your Array: "<<endl;
+    for(i=0; i<number; i++)
+    {
+        cout<<arr[i]<<endl;
+    }
+
+    for(i=0; i<number-1; i++)cout<<"array"<<": "<<arr[i]<<endl;
+    {
+
+        for(j=0; j<number-1-i; j++)
+        {
+            if(arr[j]>arr[j+1])
+            {
+                temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+            }
+            cout<<"steps: "<<arr[j]<<endl;
+        }
+    }
+
+    for(i=0; i<number; i++)
+    {
+         cout<<"Sorted array"<<": "<<arr[i]<<endl;
+    }
+
+    return 0;
+}

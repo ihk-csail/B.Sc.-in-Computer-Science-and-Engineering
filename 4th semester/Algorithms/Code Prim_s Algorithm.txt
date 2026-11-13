@@ -1,0 +1,64 @@
+#include <iostream>
+using namespace std;
+
+#define V 8               //Number od vertices in the graph
+
+int minKey(int key[], bool mstSet[])
+{
+    int min =INT_MAX, min_index;
+    for(int v=0; v<V; v++)
+    {
+        if(mstSet[v]==false && key[v]< min)
+            min=key[v],min_index=v;
+        return min_index;
+    }
+}
+
+void printMST(int parent[], int graph[V][V])              //A function to print the constructed MST
+{
+    cout<<"Edge and Weight"<<endl;
+    for(int i=1; i<V; i++)
+    {
+        cout<<parent[i]<<" and "<<graph[i][parent[i]]<<endl;
+    }
+}
+
+void primMST(int graph[V][V]) 
+{
+    int parent [V];            //Array to store constructed MST
+    int key[V];
+    bool mstSet[V];
+    for(int i; i<V; i++)         //Initialization of all keys
+    {
+        key[i]= INT_MAX, mstSet[i]= false;
+    }
+    key[0]=0;
+    parent[0]=-1; 
+
+    for(int Count=0;Count<V-1;Count++) 
+    {
+        int u= minKey(key,mstSet);      //Take the minimum key vertex from the set of vertices not yet included in MST  
+        mstSet[u]=true;
+        for(int v=0; v<V; v++)
+        {
+            if(graph[u][v] && mstSet[v]==false && graph[u][v]<key[v])
+            {
+                parent[v]=u, key[v]=graph[u][v];
+            }
+        }
+        printMST(parent, graph);        //Print function to construct MST
+    }
+}
+
+int main()
+{
+    int graph [V][V]={{0, 5, 7, 3, 0, 0, 0, 0},
+                     {5, 0, 0, 0, 2, 10, 0, 0},
+                     {7, 0, 0, 0, 0, 0, 1, 0},
+                     {3, 0, 0, 0, 0, 0, 0, 11},
+                     {0, 2, 0, 0, 0, 0, 0, 9},
+                     {0, 10, 0, 0, 0, 0, 0, 4},
+                     {0, 0, 1, 0, 0, 0, 0, 6}};
+    primMST(graph);          //Calling the primMST function
+    return 0;
+}
